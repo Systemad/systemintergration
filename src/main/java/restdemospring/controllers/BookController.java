@@ -1,6 +1,5 @@
 package restdemospring.controllers;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import restdemospring.models.*;
 import restdemospring.repositories.*;
@@ -48,6 +47,55 @@ public class BookController {
             if (id >= idFrom && id <= idTo){
                 res.add(b);
             }
+        }
+        return res;
+    }
+
+    @RequestMapping("/book/{id}/delete")
+    public Response deleteBookById(@PathVariable("id") int id) {
+        Response res = new Response("Book Deleted", Boolean.FALSE);
+
+        int indexToRemove = -1;
+        for (int i = 0; i < bookList.size(); i++) {
+            if (bookList.get(i).getId() == id) {
+                indexToRemove = i;
+            }
+        }
+        if (indexToRemove != -1) {
+            bookList.remove(indexToRemove);
+            res.setStatus(Boolean.TRUE);
+        }
+        return res;
+    }
+
+    @PostMapping("/book/add")
+    public Response addBook(@RequestBody Book b){
+        System.out.println(b.getId()+" "+b.getAuthor()+" "+b.getName());
+        Response res = new Response("Book added", Boolean.FALSE);
+        bookList.add(b);
+        res.setStatus(Boolean.TRUE);
+        return res;
+    }
+
+    @PostMapping("/book/update")
+    public Response upsertBook(@RequestBody Book b){
+        Response res = new Response("Book updated", Boolean.FALSE);
+
+        int indexToUpdate = -1;
+        for (int i = 0; i < bookList.size(); i++){
+            if (bookList.get(i).getId() == b.getId()){
+                indexToUpdate = i;
+            }
+        }
+
+        if (indexToUpdate == -1){
+            bookList.add(b);
+            res.setMessage("Book inserted");
+            res.setStatus(Boolean.TRUE);
+        }
+        else{
+            bookList.set(indexToUpdate, b);
+            res.setStatus(Boolean.TRUE);
         }
         return res;
     }
