@@ -27,6 +27,16 @@ public class XMLClient {
         return result;
     }
 
+    private static Book getBookById(int id){
+        final String uri = "http://localhost:8080/book/{id}";
+        Map<String, Integer> params = new HashMap<>();
+        params.put("id", id);
+        RestTemplate restTemplate = new RestTemplate();
+        Book result = restTemplate.getForObject(uri, Book.class, params);
+        System.out.println(result.getName() + "" + result.getAuthor());
+        return result;
+    }
+
     public static void main(String[] args){
 
         // getBook();
