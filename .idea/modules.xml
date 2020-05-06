@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JDBC/JDBC.iml" filepath="$PROJECT_DIR$/JDBC/JDBC.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpringClients/SpringClients.iml" filepath="$PROJECT_DIR$/SpringClients/SpringClients.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Uppgift1/Uppgift1.iml" filepath="$PROJECT_DIR$/Uppgift1/Uppgift1.iml" />
     </modules>
   </component>
 </project>
