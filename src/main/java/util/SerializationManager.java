@@ -34,7 +34,7 @@ public class SerializationManager {
             System.out.println("Something went wrong");
         }
         catch(ClassNotFoundException e) {
-            System.out.println("Book unkown class");
+            System.out.println("Book unknown class");
         }
         return list;
     }

@@ -45,7 +45,7 @@ public class temperatureController {
 
     @RequestMapping("/temperature/{id}/delete")
     public Response deleteBookById(@PathVariable("id") int id) {
-        Response res = new Response("Book Deleted", Boolean.FALSE);
+        Response res = new Response("Temperature log deleted", Boolean.FALSE);
 
         int indexToRemove = -1;
         for (int i = 0; i < temperatureList.size(); i++) {
@@ -63,7 +63,7 @@ public class temperatureController {
     @PostMapping("/temperature/add")
     public Response addBook(@RequestBody temperature b){
         System.out.println(b.getId()+" "+b.getTemperature()+" "+b.getHumidity() + "" + b.getLum());
-        Response res = new Response("Book added", Boolean.FALSE);
+        Response res = new Response("Temperature logged", Boolean.FALSE);
         temperatureList.add(b);
         res.setStatus(Boolean.TRUE);
         return res;

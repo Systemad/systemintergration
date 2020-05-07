@@ -1,15 +1,29 @@
 package restdemospring.controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+import org.apache.catalina.Service;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import restdemospring.models.*;
 import restdemospring.repositories.*;
+import util.SerializationManager;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 public class BookController {
 
+
     BookDAO bookDAO = new BookDAO();
+    SerializationManager sm = new SerializationManager();
     List<Book> bookList = new BookDAO().getAllBooks();
 
     @RequestMapping(value = "/bookjson", headers = "Accept=application/json")
@@ -26,6 +40,24 @@ public class BookController {
     @RequestMapping("/books")
     public List<Book> index(){
         return bookDAO.getAllBooks();
+    }
+
+    // Read from JSON file
+    @RequestMapping("/booksjson")
+    public List<Book> bookJson(){
+        List<Book> bookList = new ArrayList<Book>();
+        String json = new String();
+
+        try(BufferedReader br = new BufferedReader(new FileReader("src/main/java/restdemospring/allbooksJSON.json"))){
+            Type listType = new TypeToken<ArrayList<Book>>(){}.getType();
+            //Book book = new Gson().fromJson(br, Book.class);
+            bookList = new Gson().fromJson(br, listType);
+            System.out.println("book info" + bookList);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return bookList;
     }
 
     @RequestMapping("/book/{id}")
@@ -74,6 +106,7 @@ public class BookController {
         Response res = new Response("Book added", Boolean.FALSE);
         bookList.add(b);
         res.setStatus(Boolean.TRUE);
+        sm.serializeList(bookList, "src/main/java/restdemospring/allbooks2.ser");
         return res;
     }
 

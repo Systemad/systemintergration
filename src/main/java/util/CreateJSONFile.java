@@ -37,9 +37,7 @@ public class CreateJSONFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 
     public static void main(String[] args) {
         CreateJSONFile cr = new CreateJSONFile();
