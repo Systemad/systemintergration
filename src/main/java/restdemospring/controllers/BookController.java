@@ -43,6 +43,7 @@ public class BookController {
     }
 
     // Read from JSON file
+
     @RequestMapping("/booksjson")
     public List<Book> bookJson(){
         List<Book> bookList = new ArrayList<Book>();
@@ -59,6 +60,7 @@ public class BookController {
         }
         return bookList;
     }
+
 
     @RequestMapping("/book/{id}")
     public Book getBookById(@PathVariable int id){

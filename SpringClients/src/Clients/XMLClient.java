@@ -1,8 +1,7 @@
 package Clients;
 
-import Models.Response;
-import org.springframework.web.client.RestTemplate;
 import Models.Book;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,7 +39,8 @@ public class XMLClient {
     public static void main(String[] args){
 
         // getBook();
-        getBooksAsXMLString();
+        //getBooksAsXMLString();
+        //getBookById(4);
     }
 
 }
